@@ -19,7 +19,7 @@ export default async function Forum() {
 
 const processPostData = (post) => {
     return {
-        id: String(post._id),
+        id: post._id.toString(),
         title: post.title,
         content: post.content
     }
