@@ -1,5 +1,5 @@
 import { connectDB } from "../../../util/database";
-import Post from "../post/page";
+import PostItem from "../components/PostItem";
 
 export default async function Forum() {
     const client = await connectDB;
@@ -7,11 +7,20 @@ export default async function Forum() {
     const postCollection = await forumDB.collection('post').find().toArray() // get all posts
 
     return ( 
-        <div>
-            { postCollection.map(post =>
-                <Post title={post.title} content={post.content} />
+        <div className="forum-container space-y-2 container my-auto flex-col justify-center p-4">
+            { 
+                postCollection.map((post, idx) =>
+                    <PostItem post={processPostData(post)} key={idx} />
                 )
             }
         </div> 
     );
+}
+
+const processPostData = (post) => {
+    return {
+        id: String(post._id),
+        title: post.title,
+        content: post.content
+    }
 }
