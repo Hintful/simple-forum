@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { connectDB } from "../../../util/database";
 import PostItem from "../components/PostItem";
 
@@ -13,6 +14,11 @@ export default async function Forum() {
                     <PostItem post={processPostData(post)} key={idx} />
                 )
             }
+            <div>
+                <Link href={`forum/write`}>
+                    <button className="border-2 p-1 text-sm rounded-md hover:bg-gray-200 transition ease-in-out select-none">New Post</button>
+                </Link>
+            </div>
         </div> 
     );
 }
